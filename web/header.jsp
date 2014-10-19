@@ -1,4 +1,4 @@
-<img id="banner" src="images/logo.jpg" alt="Tough Udder logo">
+<a href="."><img id="banner" src="images/logo.jpg" alt="Tough Udder logo"></a>
  <div id='menu'>
      <ul>
          <li><a href='#'>COMPANY PROFILE</a></li>
