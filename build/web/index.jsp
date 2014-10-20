@@ -28,14 +28,16 @@
                 </tr>
                 <tr>
                     <td class="user-window">
-                        <form name="logInForm" action="." method="post">
+                        <form name="logInForm" action="Controller" method="post">
+                            <input type="hidden" name="action" value="login">
                             <label>USER ID </label>
-                            <input type="text" name="userID" required><br>
+                            <input type="text" name="userID"><br>
                             <label>PASSWORD </label>
-                            <input type="password" name="password" required><br>
+                            <input type="password" name="password"><br>
                             <label>&nbsp;</label>
                             <input type="submit" value="Log In" class="button">
                         </form>
+                        <p class="error">${account.loginError}</p>
                         <p>Not a member yet? <a href="#">Register</a>!</p>
                     </td>
                 </tr>

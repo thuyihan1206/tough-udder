@@ -10,12 +10,11 @@
     <body>
         <div id="outborder">
             <%@include file="header.jsp" %>
-            
+
             <p>Oops! Something goes wrong...</p>
-            <p>Click the above menu to go back.</p>
-            
+            <p>Please select from the above menu to continue.</p>
+
             <%@include file="footer.jsp" %>
-        </div>
-        
+        </div>      
     </body>
 </html>

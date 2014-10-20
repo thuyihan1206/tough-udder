@@ -127,6 +127,17 @@ hr {
     font-size: 14px;
 } 
 
+#log-in .error {
+    color: red;
+    font-style: italic;
+    font-size: 85%;
+}
+
+#log-in .logged_in {
+    text-align: left;
+    font-size: 120%;
+} 
+
 #log-in a {
     color: #7A2900;
 }
