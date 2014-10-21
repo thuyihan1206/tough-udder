@@ -19,7 +19,7 @@
             <table id="log-in">
                 <tr>
                     <td rowspan="2">
-                        <img class="cow" src="images/military-cow.jpg" alt="military cow">
+                        <img class="cow" src="images/ox-fight.jpg" alt="ox fight">
                         <!-- picture from http://www.bestpsdtohtml.com/wp-content/uploads/2012/12/military-cow.jpg -->
                     </td>
                     <td>

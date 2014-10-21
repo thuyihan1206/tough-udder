@@ -19,6 +19,7 @@ public class Account implements Serializable {
     private String firstName;
     private String lastName;
     private String email;
+    private Cart cart;
 
     private boolean login;
     private String loginError;
@@ -82,6 +83,14 @@ public class Account implements Serializable {
         this.email = email;
     }
 
+    public Cart getCart() {
+        return cart;
+    }
+
+    public void setCart(Cart cart) {
+        this.cart = cart;
+    }
+    
     public boolean isLogin() {
         return login;
     }

@@ -14,7 +14,7 @@ body {
 }
 
 #outborder {
-    width: 860px;
+    width: 960px;
     margin: 20px auto;
 }
 
@@ -93,7 +93,7 @@ hr {
     padding: 3px;
     border: 3px solid #996633;
     background-color: #BFA89D;
-    height: 300px;
+    width: 550px;
     box-shadow: 3px 3px 3px #888888;
 }
 
