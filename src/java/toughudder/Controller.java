@@ -1,13 +1,14 @@
 package java.toughudder;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
 
 /**
  * Controller for the Tough Udder MVC architecture.
@@ -68,6 +69,14 @@ public class Controller extends HttpServlet {
                 session.invalidate();
                 url = "/index.jsp";
                 break;
+                
+            case "checkout":
+               // Bring to the cart JSP
+               break;
+               
+            case "order_complete":
+               // Complete the order, send an email
+               break;
         }
 
         RequestDispatcher dispatcher = servletContext.getRequestDispatcher(url);
