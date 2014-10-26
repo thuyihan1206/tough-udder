@@ -13,6 +13,7 @@ body {
     padding: 0;
 }
 
+.outborder,
 #outborder {
     width: 960px;
     margin: 20px auto;
@@ -87,6 +88,7 @@ hr {
     color: #7A2900;
 }
 
+.event-img,
 #log-in .cow {
     display: block;
     margin: auto;
@@ -188,4 +190,48 @@ hr {
 .button:active {
     position: relative;
     top: 1px;
+}
+
+.event-image-container {
+	width: 175px; 
+}
+
+.event-img {
+	width: 100%;
+}
+
+.events-table {
+	color: #7A2900
+}
+
+.events-table td {
+	vertical-align: middle;
+	padding: 2px;
+	width: 190px;
+	text-align: center;
+	font-weight: bold;
+}
+
+.events-table td.event-cost {
+	width: 100px;
+}
+
+.events-table td.event-date {
+	width: 120px;
+}
+
+.events-table td.event-add {
+	width: 110px;
+}
+
+.events-table td.event-location {
+	width: 160px;
+}
+
+.events-table td.event-description {
+	padding: 2px 2px 2px 20px;
+	font-size: 16px;
+	vertical-align: middle;
+	word-wrap: break-word; 
+	width: 180px;
 }

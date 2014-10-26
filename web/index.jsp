@@ -3,8 +3,9 @@
     Created on : Sep 28, 2014, 2:45:50 PM
     Author     : Evan Chan
 --%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -13,7 +14,7 @@
         <title>Tough Udder: Obstacle Race</title>
     </head>
     <body>
-        <div id="outborder">
+        <div id="outborder"  class="outborder">
             <%@include file="header.jsp" %>
 
             <table id="log-in">
