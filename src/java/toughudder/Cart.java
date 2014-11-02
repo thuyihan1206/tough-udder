@@ -7,6 +7,8 @@ package java.toughudder;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -29,6 +31,13 @@ public class Cart implements Serializable {
    
    public boolean removeEvent(Event event) {
       return events.remove(event);
+   }
+   
+   /**
+    * Completely empties the cart of all events.
+    */
+   public void clear() {
+	   events.clear();
    }
    
    public double getTotalCost() {

@@ -18,6 +18,8 @@ import javax.servlet.http.HttpSession;
 public class Controller extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
+    public static final String CART	= "cart";
+    public static final String EVENT_CHOICES = "add-event";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -77,11 +79,37 @@ public class Controller extends HttpServlet {
             case "order_complete":
                // Complete the order, send an email
                break;
+            case "Update Cart":
+            	url = ""; //TBD
+            	updateCart(request, response);
+            	break;
         }
 
         RequestDispatcher dispatcher = servletContext.getRequestDispatcher(url);
         dispatcher.forward(request, response);
 
+    }
+    
+    /**
+     * Updates the contents of the cart based on user selections, instantiating the cart
+     * if one does not exist.
+     * 
+     * @param request  - The request object
+     * @param response - The response object
+     */
+    private void updateCart(HttpServletRequest request, HttpServletResponse response) {
+    	HttpSession session = request.getSession();
+    	Cart cart = (Cart) session.getAttribute(CART);
+    	if(cart == null) {
+    		cart = new Cart();
+    		session.setAttribute(CART, cart);
+    	}
+    	cart.clear();
+    	String[] selectedEvents = request.getParameterValues(EVENT_CHOICES); // Only the checked boxes are returned!
+    	for(String event : selectedEvents) {
+    		cart.addEvent(EventFactory.getEvent(event));
+    		System.out.println("Event added to cart: " + event);
+    	}
     }
 
     /**

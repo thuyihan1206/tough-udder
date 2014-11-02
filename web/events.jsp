@@ -9,7 +9,7 @@
     <body>
         <div id="outborder">
             <%@include file="header.jsp" %>
-            <form id="events-form" action="${pageContext.request.contextPath}/Controller" method="post">
+            <form id="events-form" action="Controller" method="post">
 	            <table id="events-table" class="events-table">
 	            	<thead>
 		            	<tr>
@@ -104,7 +104,7 @@
 		            	</tr>
 	            	</tbody>
 	            </table>
-	            <input class="event-submit" id="event-submit-btn" type="submit" name="pageName" value="Add Events To Cart"/>
+	            <input class="event-submit" id="event-submit-btn" type="submit" name="action" value="Update Cart"/>
             </form>
 			<%@include file="footer.jsp" %>
         </div>

@@ -1,8 +1,11 @@
 package java.toughudder;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 public class Event implements Serializable {
@@ -13,22 +16,16 @@ public class Event implements Serializable {
    
    private final String location;
    
-   private final Calendar date;
+   private final Date date;
 
    private final double cost;
-   
-   /** Ordered List of Obstacles encountered in this event. */
-   private final List<Obstacle> obstacles;
-
+ 
    public Event(
-         String name, String location, Calendar date, double cost, 
-         List<Obstacle> obstacles) {
-      
+      String name, String location, Date date, double cost) {
       this.name = name;
       this.location = location;
       this.date = date;
       this.cost = cost;
-      this.obstacles = Collections.unmodifiableList(obstacles);
    }
 
    public String getName() {
@@ -39,16 +36,12 @@ public class Event implements Serializable {
       return location;
    }
 
-   public Calendar getDate() {
+   public Date getDate() {
       return date;
    }
 
    public double getCost() {
       return cost;
-   }
-   
-   public List<Obstacle> getObstacles() {
-      return obstacles;
    }
    
    @Override
@@ -59,7 +52,7 @@ public class Event implements Serializable {
       result = result * hash + date.hashCode();
       long l = Double.doubleToLongBits(cost);
       result = result * hash + (int)(l ^ (l >>> Integer.SIZE));
-      result = result * hash + obstacles.hashCode();
+   //   result = result * hash + obstacles.hashCode();
       return result;
    }
    
@@ -73,8 +66,6 @@ public class Event implements Serializable {
       }
       Event other = (Event)o;
       return name.equals(other.name) && location.equals(other.location) &&
-            date.equals(other.date) && Double.compare(cost, other.cost) == 0 &&
-            obstacles.containsAll(other.obstacles) && 
-            other.obstacles.containsAll(obstacles);
+            date.equals(other.date) && Double.compare(cost, other.cost) == 0; 
    }
 }
