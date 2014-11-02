@@ -19,14 +19,21 @@ public class Event implements Serializable {
    private final Date date;
 
    private final double cost;
+   
+   private final String imgName;
  
    public Event(
-      String name, String location, Date date, double cost) {
+      String name, String location, Date date, double cost, String imgName) {
       this.name = name;
       this.location = location;
       this.date = date;
       this.cost = cost;
+      this.imgName = imgName;
    }
+
+   public String getImgName() {
+	return imgName;
+}
 
    public String getName() {
       return name;

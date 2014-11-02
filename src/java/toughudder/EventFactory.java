@@ -4,7 +4,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 
@@ -53,7 +52,7 @@ public class EventFactory {
 	
 	private static Event getUdderDayEvent() {
 		try {
-			return new Event("Udder Day", "The Bahamas", dateFormat.parse("07-21-2015"), 2500.00);
+			return new Event("Udder Day", "The Bahamas", dateFormat.parse("07-21-2015"), 2500.00, "just-an-udder-day.jpg");
 		} catch (ParseException e) {
 			e.printStackTrace();
 			return null;
@@ -62,7 +61,7 @@ public class EventFactory {
 	
 	private static Event getMuddyUdderEvent() {
 		try {
-			return new Event("Muddy Udder", "Everglades, Florida", dateFormat.parse("07-07-2015"), 120.00);
+			return new Event("Muddy Udder", "Everglades, Florida", dateFormat.parse("07-07-2015"), 120.00, "muddy-udder.png");
 		} catch (ParseException e) {
 			e.printStackTrace();
 			return null;
@@ -71,7 +70,7 @@ public class EventFactory {
 	
 	private static Event getHolyCowEvent() {
 		try {
-			return new Event("Holy Cow", "Wichita, Kansas", dateFormat.parse("06-19-2015"), 50.00);
+			return new Event("Holy Cow", "Wichita, Kansas", dateFormat.parse("06-19-2015"), 50.00, "holy-cow.jpg");
 		} catch (ParseException e) {
 			e.printStackTrace();
 			return null;
@@ -80,7 +79,7 @@ public class EventFactory {
 	
 	private static Event getMadCowEvent() {
 		try {
-			return new Event("Mad Cow", "Knoxville, Tennessee", dateFormat.parse("06-15-2015"), 75.00);
+			return new Event("Mad Cow", "Knoxville, Tennessee", dateFormat.parse("06-15-2015"), 75.00, "mad-cow-mud-run.png");
 		} catch (ParseException e) {
 			e.printStackTrace();
 			return null;
