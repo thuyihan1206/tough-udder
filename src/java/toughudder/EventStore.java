@@ -29,20 +29,20 @@ public class EventStore {
       Map<String, Event> tempMap = new HashMap<>();
       
       String name = "Tough Udder MD";
-      List<Obstacle> obstacles = new ArrayList<>();
-      obstacles.addAll(ObstacleStore.instance().getObstacles());
+      //List<Obstacle> obstacles = new ArrayList<>();
+      //obstacles.addAll(ObstacleStore.instance().getObstacles());
       Calendar date = Calendar.getInstance();
       date.set(Calendar.MONTH, Calendar.NOVEMBER);
       date.set(Calendar.DAY_OF_MONTH, 5);
-      tempMap.put(name, new Event(name, "MD", date, 100.0, obstacles));
+     // tempMap.put(name, new Event(name, "MD", date, 100.0));
       
       name = "Tough Udder DC";
-      obstacles = new ArrayList<>();
-      obstacles.addAll(ObstacleStore.instance().getObstacles());
+      //obstacles = new ArrayList<>();
+     // obstacles.addAll(ObstacleStore.instance().getObstacles());
       date = Calendar.getInstance();
       date.set(Calendar.MONTH, Calendar.DECEMBER);
       date.set(Calendar.DAY_OF_MONTH, 10);
-      tempMap.put(name, new Event(name, "DC", date, 120.0, obstacles));
+    //  tempMap.put(name, new Event(name, "DC", date, 120.0));
       
       eventMap = Collections.unmodifiableMap(tempMap);
    }
