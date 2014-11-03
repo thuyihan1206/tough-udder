@@ -1,4 +1,5 @@
-package java.toughudder;
+//package java.toughudder;
+package toughudder;
 
 import java.io.IOException;
 import javax.servlet.http.HttpServlet;
