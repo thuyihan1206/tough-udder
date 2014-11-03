@@ -1,5 +1,5 @@
-//package java.toughudder;
-package toughudder;
+package java.toughudder;
+//package toughudder;
 
 import java.io.IOException;
 
@@ -72,6 +72,10 @@ public class Controller extends HttpServlet {
                 session.invalidate();
                 url = "/index.jsp";
                 break;
+            
+            case "events":
+                url = "/events.jsp";
+                break;
                 
             case "checkout":
                // Bring to the cart JSP
@@ -80,6 +84,7 @@ public class Controller extends HttpServlet {
             case "order_complete":
                // Complete the order, send an email
                break;
+                
             case "Update Cart":
             	url = ""; //TBD
             	updateCart(request, response);
