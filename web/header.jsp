@@ -12,7 +12,7 @@
             <li><a href='#'>MY CART</a></li>
             <li><a href='#'>MY ACCOUNT</a></li>
             <li><a href='Controller?action=logout'>LOG OUT</a></li>
-        </c:if>
+            </c:if>
     </ul>
 </div>
 <hr>

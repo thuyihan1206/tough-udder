@@ -3,9 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-package java.toughudder;
-//package toughudder;
+package toughudder;
 
 import java.io.Serializable;
 
@@ -92,7 +90,7 @@ public class Account implements Serializable {
     public void setCart(Cart cart) {
         this.cart = cart;
     }
-    
+
     public boolean isLogin() {
         return login;
     }

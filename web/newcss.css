@@ -193,64 +193,64 @@ hr {
 }
 
 .event-image-container {
-	width: 175px; 
+    width: 175px; 
 }
 
 .event-img {
-	width: 100%;
+    width: 100%;
 }
 
 .outborder #events-form {
-	text-align: center;
-	width: 100%;
+    text-align: center;
+    width: 100%;
 }
 
 .events-table {
-	color: #7A2900;
-	background-color: #F0E9E6;
-	text-align: center;
-	width: 100%;
+    color: #7A2900;
+    background-color: #F0E9E6;
+    text-align: center;
+    width: 100%;
 }
 
 .events-table td {
-	vertical-align: middle;
-	padding: 2px;
-	width: 160px;
-	text-align: center;
-	font-weight: bold;
+    vertical-align: middle;
+    padding: 2px;
+    width: 160px;
+    text-align: center;
+    font-weight: bold;
 }
 
 .events-table td.event-cost {
-	width: 100px;
+    width: 100px;
 }
 
 .events-table td.event-date {
-	width: 120px;
+    width: 120px;
 }
 
 .events-table td.event-add {
-	width: 110px;
+    width: 110px;
 }
 
 .events-table td.event-location {
-	width: 160px;
+    width: 160px;
 }
 
 .events-table td.event-description {
-	padding: 2px 2px 2px 20px;
-	font-size: 16px;
-	vertical-align: middle;
-	word-wrap: break-word; 
-	width: 180px;
+    padding: 2px 2px 2px 20px;
+    font-size: 16px;
+    vertical-align: middle;
+    word-wrap: break-word; 
+    width: 180px;
 }
 
 #events-form {
-	text-align: center;
+    text-align: center;
 }
 
 .event-submit {
-	text-align: center;
-	text-decoration: none;
+    text-align: center;
+    text-decoration: none;
     padding: 10px 20px;
     color: #FFFFFF;
     background: #f0b7a1; /* Old browsers */
@@ -265,5 +265,5 @@ hr {
 }
 
 .event-submit:hover {
-	background: #6B2400;
+    background: #6B2400;
 }
