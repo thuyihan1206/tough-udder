@@ -17,130 +17,168 @@ import javax.servlet.http.HttpSession;
  */
 public class Controller extends HttpServlet {
 
-    private static final long serialVersionUID = 1L;
-    public static final String CART = "cart";
-    public static final String EVENT_CHOICES = "add-event";
+   private static final long serialVersionUID = 1L;
+   public static final String CART = "cart";
+   public static final String EVENT_CHOICES = "add-event";
+   public static final String CC_DATA = "ccData";
+   public static final String ERROR = "error";
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws javax.servlet.ServletException
-     * @throws java.io.IOException
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        HttpSession session = request.getSession();
-        ServletContext servletContext = getServletContext();
+   /**
+    * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+    * methods.
+    *
+    * @param request servlet request
+    * @param response servlet response
+    * @throws javax.servlet.ServletException
+    * @throws java.io.IOException
+    */
+   protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+      response.setContentType("text/html;charset=UTF-8");
+      HttpSession session = request.getSession();
+      ServletContext servletContext = getServletContext();
 
-        // default variables
-        Account account;
-        String url = "/index.jsp";
+      // default variables
+      Account account;
+      String url = "/index.jsp";
 
-        // get current action
-        String action = request.getParameter("action");
+      // get current action
+      String action = request.getParameter("action");
 
-        switch (action) {
-            case "home":
-                account = (Account) session.getAttribute("account");
-                if (account != null && account.isLogin()) {
-                    url = "/index_loggedin.jsp";
-                } else {
-                    url = "/index.jsp";
-                }
-                break;
+      switch (action) {
+         case "home":
+            account = (Account) session.getAttribute("account");
+            if (account != null && account.isLogin()) {
+               url = "/index_loggedin.jsp";
+            } else {
+               url = "/index.jsp";
+            }
+            break;
 
-            case "login":
-                // create Account object
-                account = new Account();
-                String userID = request.getParameter("userID");
-                String password = request.getParameter("password");
-                account.checkLogin(userID, password);
-                session.setAttribute("account", account);
+         case "login":
+            // create Account object
+            account = new Account();
+            String userID = request.getParameter("userID");
+            String password = request.getParameter("password");
+            account.checkLogin(userID, password);
+            session.setAttribute("account", account);
 
-                if (account.isLogin()) {
-                    url = "/index_loggedin.jsp";
-                } else {
-                    url = "/index.jsp";
-                }
-                break;
+            if (account.isLogin()) {
+               url = "/index_loggedin.jsp";
+            } else {
+               url = "/index.jsp";
+            }
+            break;
 
-            case "logout":
-                session.invalidate();
-                url = "/index.jsp";
-                break;
+         case "logout":
+            session.invalidate();
+            url = "/index.jsp";
+            break;
 
-            case "events":
-                url = "/events.jsp";
-                break;
+         case "events":
+            url = "/events.jsp";
+            break;
 
-            case "checkout":
-                // Bring to the cart JSP
-                break;
+         case "cart":
+            url = "/cart.jsp";
+            break;
 
-            case "order_complete":
-                // Complete the order, send an email
-                break;
+         case "Remove from Cart":
+            url = "/cart.jsp";
+            updateCart(request, response, false);
+            break;
 
-            case "Update Cart":
-                url = ""; //TBD
-                updateCart(request, response);
-                break;
-        }
+         case "Checkout":
+            url = "/checkout.jsp";
+            break;
 
-        RequestDispatcher dispatcher = servletContext.getRequestDispatcher(url);
-        dispatcher.forward(request, response);
+         case "Complete Registration":
+            CreditCardWorkerBean ccwb = new CreditCardWorkerBean(request);
+            // Bad CC info? Go back the the checkout page.
+            if (ccwb.isError()) {
+               request.setAttribute(ERROR, ccwb.getError());
+               request.setAttribute(CC_DATA, ccwb.getData());
+               url = "/checkout.jsp";
+            }
+            // Otherwise, complete the registration.
+            else {
+               // If we we're doing so, here's where we'd charge the CC.
+               EmailWorkerBean ewb =
+                     new EmailWorkerBean(request, ccwb.getData());
 
-    }
+               if (ewb.isError()) {
+                  request.setAttribute(ERROR, ewb.getError());
+               }
+               url = "/confirmation.jsp";
+            }
+            break;
 
-    /**
-     * Updates the contents of the cart based on user selections, instantiating
-     * the cart if one does not exist.
-     *
-     * @param request - The request object
-     * @param response - The response object
-     */
-    private void updateCart(HttpServletRequest request, HttpServletResponse response) {
-        HttpSession session = request.getSession();
-        Cart cart = (Cart) session.getAttribute(CART);
-        if (cart == null) {
-            cart = new Cart();
-            session.setAttribute(CART, cart);
-        }
-        cart.clear();
-        String[] selectedEvents = request.getParameterValues(EVENT_CHOICES); // Only the checked boxes are returned!
-        for (String event : selectedEvents) {
-            //        cart.addEvent(EventFactory.getEvent(event));
-            System.out.println("Event added to cart: " + event);
-        }
-    }
+         case "Add to Cart":
+            url = "/cart.jsp";
+            updateCart(request, response, true);
+            break;
+      }
 
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request - servlet request
-     * @param response - servlet response
-     * @throws javax.servlet.ServletException
-     * @throws java.io.IOException
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        processRequest(request, response);
-    }
+      RequestDispatcher dispatcher = servletContext.getRequestDispatcher(url);
+      dispatcher.forward(request, response);
+   }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request - servlet request
-     * @param response - servlet response
-     * @throws javax.servlet.ServletException
-     * @throws java.io.IOException
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        processRequest(request, response);
-    }
+   /**
+    * Updates the contents of the cart based on user selections, instantiating
+    * the cart if one does not exist.
+    *
+    * @param request - The request object
+    * @param response - The response object
+    * @param add - true to add, false to remove
+    */
+   private void updateCart(HttpServletRequest request, HttpServletResponse response, boolean add) {
+      HttpSession session = request.getSession();
+      Cart cart = (Cart) session.getAttribute(CART);
+      if (cart == null) {
+         cart = new Cart();
+         session.setAttribute(CART, cart);
+      }
+      String[] selectedEvents = request.getParameterValues(EVENT_CHOICES); // Only the checked boxes are returned!
+      for (String name : selectedEvents) {
+         Event event = EventStore.instance().getEvent(name);
+         if (event != null) {
+            if (add) {
+               cart.addEvent(event);
+               System.out.println("Event added to cart: " + name);
+            } else {
+               cart.removeEvent(event);
+               System.out.println("Event removed from cart: " + name);
+            }
+         } else {
+            System.out.println("Received a bad event name in updateCart():"
+                  + name);
+         }
+      }
+   }
+
+   /**
+    * Handles the HTTP <code>GET</code> method.
+    *
+    * @param request - servlet request
+    * @param response - servlet response
+    * @throws javax.servlet.ServletException
+    * @throws java.io.IOException
+    */
+   @Override
+   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+      processRequest(request, response);
+   }
+
+   /**
+    * Handles the HTTP <code>POST</code> method.
+    *
+    * @param request - servlet request
+    * @param response - servlet response
+    * @throws javax.servlet.ServletException
+    * @throws java.io.IOException
+    */
+   @Override
+   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+      processRequest(request, response);
+   }
 
 }
