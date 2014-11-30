@@ -6,6 +6,9 @@
 package toughudder;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -19,10 +22,16 @@ public class Cart implements Serializable {
 
     private static final long serialVersionUID = 8600291804865739176L;
 
-    private List<Event> events;
+    private final List<Event> events;
+
+    private final NumberFormat costFormat;
+
+    private final DateFormat dateFormat;
 
     public Cart() {
         events = new ArrayList<>();
+        costFormat = NumberFormat.getCurrencyInstance();
+        dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     }
 
     public void addEvent(Event event) {
@@ -38,6 +47,18 @@ public class Cart implements Serializable {
      */
     public void clear() {
         events.clear();
+    }
+
+    public List<Event> getEvents() {
+       return events;
+    }
+
+    public NumberFormat getCostFormat() {
+       return costFormat;
+    }
+
+    public DateFormat getDateFormat() {
+       return dateFormat;
     }
 
     public double getTotalCost() {

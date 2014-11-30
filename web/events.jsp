@@ -104,7 +104,7 @@
                         </tr>
                     </tbody>
                 </table>
-                <input class="event-submit" id="event-submit-btn" type="submit" name="action" value="Update Cart"/>
+                <input class="event-submit" id="event-submit-btn" type="submit" name="action" value="Add to Cart"/>
             </form>
             <%@include file="footer.jsp" %>
         </div>
