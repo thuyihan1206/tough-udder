@@ -33,7 +33,8 @@ public class EmailWorkerBean {
          msg.append("<td>").append(cart.getDateFormat().format(evt.getDate()));
          msg.append("</td>");
          msg.append("<td>").append(evt.getLocation()).append("</td>");
-         msg.append("<td>").append(cart.getCostFormat().format(evt.getCost()));
+         msg.append("<td align='right'>");
+         msg.append(cart.getCostFormat().format(evt.getCost()));
          msg.append("</td></tr>");
       }
       msg.append("<tr><th></th><th></th><th>Total</th><th>");

@@ -35,7 +35,7 @@
          <p>There was a problem with the entered payment info:<br /><%= error.toString()%></p>
          <br />
          <% } %>
-         <form action="Controller?action=complete" method="post">
+         <form action="Controller?action=complete" method="post"> 
             <fieldset>
                <legend>Billing Address</legend>
                <table>
@@ -149,7 +149,7 @@
                      <button class="event-submit" id="cart-btn" type="button" onclick="location.href='Controller?action=cart'">Edit Cart</button>
                   </th>
                   <th>
-                     <input class="event-submit" id="complete-btn" type="submit" value="Complete Registration" onclick="location.href='Controller?action=complete'" />
+                     <input class="event-submit" id="complete-btn" type="submit" value="Complete Registration" />
                   </th>
                </tr>
             </table>

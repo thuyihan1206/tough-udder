@@ -93,7 +93,7 @@ public class Controller extends HttpServlet {
             url = "/checkout.jsp";
             break;
 
-         case "Complete Registration":
+         case "complete":
             CreditCardWorkerBean ccwb = new CreditCardWorkerBean(request);
             // Bad CC info? Go back the the checkout page.
             if (ccwb.isError()) {
@@ -106,6 +106,7 @@ public class Controller extends HttpServlet {
                EmailWorkerBean ewb
                      = new EmailWorkerBean(request, ccwb.getData());
 
+               request.setAttribute(CC_DATA, ccwb.getData());
                if (ewb.isError()) {
                   request.setAttribute(ERROR, ewb.getError());
                }
