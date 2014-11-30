@@ -50,15 +50,15 @@ public class Cart implements Serializable {
     }
 
     public List<Event> getEvents() {
-       return events;
+        return events;
     }
 
     public NumberFormat getCostFormat() {
-       return costFormat;
+        return costFormat;
     }
 
     public DateFormat getDateFormat() {
-       return dateFormat;
+        return dateFormat;
     }
 
     public double getTotalCost() {

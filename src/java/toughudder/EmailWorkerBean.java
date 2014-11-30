@@ -5,14 +5,14 @@ import javax.servlet.http.HttpServletRequest;
 
 public class EmailWorkerBean {
 
-   private static final String BR = "<br />";
+    private static final String BR = "<br />";
 
-   private static final String FROM = "swdevconf@jhu.edu";
-   private static final String SUBJ = " JHU SW Dev Conf Registration";
+    private static final String FROM = "swdevconf@jhu.edu";
+    private static final String SUBJ = " JHU SW Dev Conf Registration";
 
-   private final String error;
+    private final String error;
 
-   private final String msg;
+    private final String msg;
 
    public EmailWorkerBean(HttpServletRequest request, CreditCardInfoBean ccib) {
 
@@ -47,7 +47,7 @@ public class EmailWorkerBean {
       msg.append(ccib.getExpiryMonth()).append(" ");
       msg.append(ccib.getExpiryYear());
 
-      msg.append("</body></html>");
+        msg.append("</body></html>");
 
       try {
          MailUtilGmail.sendMail(email, FROM, SUBJ, msg.toString(), true);
@@ -55,20 +55,19 @@ public class EmailWorkerBean {
       catch (Throwable t) {
          error.append(t.getMessage());
       }
-
       this.msg = msg.toString();
       this.error = error.toString();
-   }
+    }
 
-   public String getMsg() {
-      return msg;
-   }
+    public String getMsg() {
+        return msg;
+    }
 
-   public String getError() {
-      return error;
-   }
+    public String getError() {
+        return error;
+    }
 
-   public boolean isError() {
-      return error.length() > 0;
-   }
+    public boolean isError() {
+        return error.length() > 0;
+    }
 }

@@ -6,6 +6,7 @@
 package toughudder;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  *
@@ -109,23 +110,29 @@ public class Account implements Serializable {
 
     // methods
     // check if userID and password match
-    public void checkLogin(String userID, String password) {
+    public void checkLogin(String userID, String password,
+            ArrayList<Account> accountList) {
         if (userID == null || userID.isEmpty()
                 || password == null || password.isEmpty()) {
             setLogin(false);
             setLoginError("Enter UserID and Password.");
-
-        } else if (userID.equalsIgnoreCase("tough") && password.equals("udder")) {
-            // userID and password are hard coded for now
-            setLogin(true);
-            setFirstName("Tough");
-            setLastName("Udder");
-            setLoginError("");
+            return;
 
         } else {
-            setLogin(false);
-            setLoginError("UserID or Password incorrect.");
+            for (Account account : accountList) {
+                if (userID.equalsIgnoreCase(account.getUserID())
+                        && password.equals(account.getPassword())) {
+                    setLogin(true);
+                    setFirstName(account.getFirstName());
+                    setLastName(account.getLastName());
+                    setLoginError("");
+                    return;
+                }
+            }
         }
+
+        setLogin(false);
+        setLoginError("UserID or Password incorrect.");
     }
 
 }

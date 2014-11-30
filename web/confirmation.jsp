@@ -7,6 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+<<<<<<< HEAD
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
       <title>Tough Udder: Obstacle Race</title>
@@ -82,4 +83,13 @@
          <%@include file="footer.jsp" %>
       </div>
    </body>
+=======
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
+    </head>
+    <body>
+        <h1>Hello World!</h1>
+    </body>
+>>>>>>> a9fdd61823c57c25911145e1215e7ab31ca092fc
 </html>
