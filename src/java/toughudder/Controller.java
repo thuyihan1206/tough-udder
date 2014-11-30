@@ -2,7 +2,6 @@ package toughudder;
 
 import java.io.IOException;
 import java.util.ArrayList;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -22,6 +21,7 @@ public class Controller extends HttpServlet {
     public static final String CART = "cart";
     public static final String EVENT_CHOICES = "add-event";
     public static final String CC_DATA = "ccData";
+    public static final String EMAIL = "email";
     public static final String ERROR = "error";
 
     /**
@@ -93,7 +93,7 @@ public class Controller extends HttpServlet {
 //                }
                 break;
 
-            case "Complete Registration":
+            case "complete":
                 CreditCardWorkerBean ccwb = new CreditCardWorkerBean(request);
                 // Bad CC info? Go back the the checkout page.
                 if (ccwb.isError()) {
@@ -106,6 +106,7 @@ public class Controller extends HttpServlet {
                     EmailWorkerBean ewb
                             = new EmailWorkerBean(request, ccwb.getData());
 
+                    request.setAttribute(CC_DATA, ccwb.getData());
                     if (ewb.isError()) {
                         request.setAttribute(ERROR, ewb.getError());
                     }
@@ -131,7 +132,9 @@ public class Controller extends HttpServlet {
      * @param response - The response object
      * @param add - true to add, false to remove
      */
-    private void updateCart(HttpServletRequest request, HttpServletResponse response, boolean add) {
+    private void updateCart(
+            HttpServletRequest request, HttpServletResponse response, boolean add) {
+
         HttpSession session = request.getSession();
         Cart cart = (Cart) session.getAttribute(CART);
         if (cart == null) {
@@ -139,19 +142,21 @@ public class Controller extends HttpServlet {
             session.setAttribute(CART, cart);
         }
         String[] selectedEvents = request.getParameterValues(EVENT_CHOICES); // Only the checked boxes are returned!
-        for (String name : selectedEvents) {
-            Event event = EventStore.instance().getEvent(name);
-            if (event != null) {
-                if (add) {
-                    cart.addEvent(event);
-                    System.out.println("Event added to cart: " + name);
+        if (selectedEvents != null) {
+            for (String name : selectedEvents) {
+                Event event = EventStore.instance().getEvent(name);
+                if (event != null) {
+                    if (add) {
+                        cart.addEvent(event);
+                        System.out.println("Event added to cart: " + name);
+                    } else {
+                        cart.removeEvent(event);
+                        System.out.println("Event removed from cart: " + name);
+                    }
                 } else {
-                    cart.removeEvent(event);
-                    System.out.println("Event removed from cart: " + name);
+                    System.out.println("Received a bad event name in updateCart():"
+                            + name);
                 }
-            } else {
-                System.out.println("Received a bad event name in updateCart():"
-                        + name);
             }
         }
     }
@@ -202,5 +207,4 @@ public class Controller extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         processRequest(request, response);
     }
-
 }

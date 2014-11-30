@@ -13,7 +13,7 @@ public class CreditCardWorkerBean {
     public CreditCardWorkerBean(HttpServletRequest request) {
         StringBuilder error = new StringBuilder();
 
-        String cardName = request.getParameter("cardName").trim();
+        String cardName = request.getParameter("cardName");
         if (cardName == null || cardName.length() < 1) {
             error.append("Please enter the cardholder's name.").append(BR);
         }
@@ -21,7 +21,7 @@ public class CreditCardWorkerBean {
         if (cardType == null || cardType.length() < 1) {
             error.append("Please choose a credit card type.").append(BR);
         }
-        String cardNum = request.getParameter("cardNum").trim();
+        String cardNum = request.getParameter("cardNum");
         if (cardNum == null || cardNum.length() < 1) {
             error.append("Please enter a credit card number.").append(BR);
         }
@@ -33,8 +33,25 @@ public class CreditCardWorkerBean {
         if (expMonth == null || expMonth.length() < 1) {
             error.append("Please choose an expiry month.").append(BR);
         }
+        String address = request.getParameter("address");
+        if (address == null || address.length() < 1) {
+            error.append("Please enter the billing address.").append(BR);
+        }
+        String city = request.getParameter("city");
+        if (city == null || city.length() < 1) {
+            error.append("Please enter the billing address city.").append(BR);
+        }
+        String state = request.getParameter("state");
+        if (state == null || state.length() != 2) {
+            error.append("Please enter the billing address state.").append(BR);
+        }
+        String zip = request.getParameter("zip");
+        if (zip == null || zip.length() != 5) {
+            error.append("Please enter the billing address zip code.").append(BR);
+        }
         ccib = new CreditCardInfoBean(
-                cardName, cardType, cardNum, expYear, expMonth);
+                cardName, cardType, cardNum, expYear, expMonth, address, city,
+                state, zip);
         if (!ccib.isValid()) {
             error.append("Credit card data is invalid.").append(BR);
         }
