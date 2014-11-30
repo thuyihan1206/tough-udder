@@ -35,7 +35,48 @@
          <p>There was a problem with the entered payment info:<br /><%= error.toString()%></p>
          <br />
          <% } %>
-         <form action="Controller?action=submit" method="post">
+         <form action="Controller?action=complete" method="post">
+            <fieldset>
+               <legend>Billing Address</legend>
+               <table>
+                  <tr>
+                     <td>Address</td>
+                     <td><input type="text" name="address" size="30" value="<%= ccib.getAddress() == null ? "" : ccib.getAddress() %>"/></td>
+                  </tr>
+                  <tr>
+                     <td>City</td>
+                     <td><input type="text" name="city" size="20" value="<%= ccib.getCity() == null ? "" : ccib.getCity() %>"/></td>
+                  </tr>
+                  <tr>
+                     <td>State</td>
+                     <% String[] states = new String[] {
+                              "AK", "AL", "AR", "AZ", "CA", "CO", "CT", "DC",
+                              "DE", "FL", "GA", "HI", "IA", "ID", "IL", "IN",
+                              "KS", "KY", "LA", "MA", "MD", "ME", "MI", "MN",
+                              "MO", "MS", "MT", "NC", "ND", "NE", "NH", "NJ",
+                              "NM", "NV", "NY", "OH", "OK", "OR", "PA", "RI",
+                              "SC", "SD", "TN", "TX", "UT", "VA", "VT", "WA",
+                              "WI", "WV", "WY"};
+                     %>
+                     <td>
+                        <select name="state">
+                           <% for (String st : states) {
+                                 if (st.equals(ccib.getState())) { %>
+                           <option selected="selected"><%= st %></option>
+                           <%    } else { %>
+                           <option><%= st%></option>
+                           <%    }
+                              }
+                           %>
+                        </select>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td>ZIP</td>
+                     <td><input type="text" name="zip" size="5" value="<%= ccib.getZip() == null ? "" : ccib.getZip() %>"/></td>
+                  </tr>
+               </table>
+            </fieldset>
             <fieldset>
                <legend>Credit Card Information</legend>
                <table>
@@ -97,6 +138,10 @@
                   </tr>
                </table>
             </fieldset>
+            <fieldset>
+               <legend>Email Address</legend>
+               <input type="text" name="email" size="30" value="<%= request.getParameter(Controller.EMAIL) == null ? "" : request.getParameter(Controller.EMAIL) %>" />
+            </fieldset>
             <br />
             <table cellpadding="10">
                <tr>
@@ -104,7 +149,7 @@
                      <button class="event-submit" id="cart-btn" type="button" onclick="location.href='Controller?action=cart'">Edit Cart</button>
                   </th>
                   <th>
-                     <input class="event-submit" id="complete-btn" type="button" value="Complete Registration" />
+                     <input class="event-submit" id="complete-btn" type="submit" value="Complete Registration" onclick="location.href='Controller?action=complete'" />
                   </th>
                </tr>
             </table>

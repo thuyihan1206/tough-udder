@@ -1,7 +1,7 @@
 package toughudder;
 
 public class CreditCardInfoBean {
-   
+
    private String name;
 
    private String type;
@@ -12,19 +12,32 @@ public class CreditCardInfoBean {
 
    private String expiryMonth;
 
+   private String address;
+
+   private String city;
+
+   private String state;
+
+   private String zip;
+
    private boolean valid;
 
    public CreditCardInfoBean() {}
 
    public CreditCardInfoBean(
          String name, String type, String number, String expiryYear,
-         String expiryMonth) {
+         String expiryMonth, String address, String city, String state,
+         String zip) {
 
       this.name = name;
       this.type = type;
       this.number = number;
       this.expiryYear = expiryYear;
       this.expiryMonth = expiryMonth;
+      this.address = address;
+      this.city = city;
+      this.state = state;
+      this.zip = zip;
       validate();
    }
 
@@ -92,6 +105,42 @@ public class CreditCardInfoBean {
 
    public void setExpiryMonth(String expiryMonth) {
       this.expiryMonth = expiryMonth;
+      validate();
+   }
+
+   public String getAddress() {
+      return address;
+   }
+
+   public void setAddress(String address) {
+      this.address = address;
+      validate();
+   }
+
+   public String getCity() {
+      return city;
+   }
+
+   public void setCity(String city) {
+      this.city = city;
+      validate();
+   }
+
+   public String getState() {
+      return state;
+   }
+
+   public void setState(String state) {
+      this.state = state;
+      validate();
+   }
+
+   public String getZip() {
+      return zip;
+   }
+
+   public void setZip(String zip) {
+      this.zip = zip;
       validate();
    }
 
