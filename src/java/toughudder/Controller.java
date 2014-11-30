@@ -1,6 +1,7 @@
 package toughudder;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -59,7 +60,8 @@ public class Controller extends HttpServlet {
                 account = new Account();
                 String userID = request.getParameter("userID");
                 String password = request.getParameter("password");
-                account.checkLogin(userID, password);
+                account.checkLogin(userID, password, 
+                        (ArrayList<Account>) servletContext.getAttribute("accountList"));
                 session.setAttribute("account", account);
 
                 if (account.isLogin()) {
