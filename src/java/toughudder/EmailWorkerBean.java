@@ -22,7 +22,7 @@ public class EmailWorkerBean {
       String email = request.getParameter(Controller.EMAIL);
 
       msg.append("<p>Your Tough Udder registration(s) have been processed.");
-      msg.append("Below you will find a summary of your registration and");
+      msg.append("Below you will find a summary of your registration and ");
       msg.append("payment information.</p>").append(BR);
 
       msg.append("<table cellpadding='5'>");
