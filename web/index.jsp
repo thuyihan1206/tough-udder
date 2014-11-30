@@ -39,7 +39,9 @@
                             <input type="submit" value="Log In" class="button">
                         </form>
                         <p class="error">${account.loginError}</p>
+                        <!--
                         <p>Not a member yet? <a href="#">Register</a>!</p>
+                        -->
                     </td>
                 </tr>
             </table>

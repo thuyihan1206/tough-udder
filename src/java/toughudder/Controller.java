@@ -39,7 +39,6 @@ public class Controller extends HttpServlet {
         ServletContext servletContext = getServletContext();
 
         // default variables
-        Account account;
         String url = "/index.jsp";
 
         // get current action
@@ -47,28 +46,23 @@ public class Controller extends HttpServlet {
 
         switch (action) {
             case "home":
-                account = (Account) session.getAttribute("account");
-                if (account != null && account.isLogin()) {
-                    url = "/index_loggedin.jsp";
-                } else {
-                    url = "/index.jsp";
-                }
+                url = checkLogin(request, "/index_loggedin.jsp", "/index.jsp");
                 break;
 
             case "login":
                 // create Account object
-                account = new Account();
+                Account account = new Account();
                 String userID = request.getParameter("userID");
                 String password = request.getParameter("password");
-                account.checkLogin(userID, password, 
+                account.checkAccount(userID, password,
                         (ArrayList<Account>) servletContext.getAttribute("accountList"));
                 session.setAttribute("account", account);
 
-                if (account.isLogin()) {
-                    url = "/index_loggedin.jsp";
-                } else {
-                    url = "/index.jsp";
-                }
+                url = checkLogin(request, "/index_loggedin.jsp", "/login.jsp");
+                break;
+
+            case "account":
+                url = checkLogin(request, "/account.jsp", "/login.jsp");
                 break;
 
             case "logout":
@@ -90,10 +84,13 @@ public class Controller extends HttpServlet {
                 break;
 
             case "Checkout":
-//              url = "https://localhost:8443/ToughUdder/checkout.jsp"; // local; need to start Tomcat standalone outside NetBeans
-//                response.sendRedirect(url);
-//                return;
-                url = "/checkout.jsp";
+                url = checkLogin(request, "/checkout.jsp", "/login.jsp");
+//                if (url.equals("/checkout.jsp")) {
+//                    // use HTTPS
+//                    url = "https://localhost:8443/ToughUdder/checkout.jsp"; // local; need to start Tomcat standalone outside NetBeans
+//                    response.sendRedirect(url);
+//                    return;
+//                }
                 break;
 
             case "Complete Registration":
@@ -157,6 +154,27 @@ public class Controller extends HttpServlet {
                         + name);
             }
         }
+    }
+
+    /**
+     * Check if user has logged in. If yes: go to the desired page. If no:
+     * redirect to the redirect page.
+     *
+     * @param request - The request object
+     * @param desiredPage - The desired page
+     * @param redirectPage - The redirect page
+     */
+    private String checkLogin(HttpServletRequest request,
+            String desiredPage, String redirectPage) {
+        HttpSession session = request.getSession();
+        Account account = (Account) session.getAttribute("account");
+        String url;
+        if (account != null && account.isLogin()) {
+            url = desiredPage;
+        } else {
+            url = redirectPage;
+        }
+        return url;
     }
 
     /**

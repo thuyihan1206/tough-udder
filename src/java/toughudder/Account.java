@@ -110,7 +110,7 @@ public class Account implements Serializable {
 
     // methods
     // check if userID and password match
-    public void checkLogin(String userID, String password,
+    public void checkAccount(String userID, String password,
             ArrayList<Account> accountList) {
         if (userID == null || userID.isEmpty()
                 || password == null || password.isEmpty()) {
@@ -123,8 +123,10 @@ public class Account implements Serializable {
                 if (userID.equalsIgnoreCase(account.getUserID())
                         && password.equals(account.getPassword())) {
                     setLogin(true);
+                    setUserID(account.getUserID());
                     setFirstName(account.getFirstName());
                     setLastName(account.getLastName());
+                    setEmail(account.getEmail());
                     setLoginError("");
                     return;
                 }
