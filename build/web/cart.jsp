@@ -17,11 +17,11 @@
             <%@include file="header.jsp" %>
             <%@ page import="java.util.List" %>
             <%@ page import="toughudder.*" %>
-            <% Cart cart = (Cart)session.getAttribute("cart");
-               if (cart == null) {
-                  cart = new Cart();
-               }
-               List<Event> contents = cart.getEvents();
+            <% Cart cart = (Cart) session.getAttribute("cart");
+                if (cart == null) {
+                    cart = new Cart();
+                }
+                List<Event> contents = cart.getEvents();
             %>
             <form id="events-form" action="Controller" method="post">
                 <table id="events-table" class="events-table">
@@ -36,34 +36,34 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <% for (Event evt : contents) { %>
+                        <% for (Event evt : contents) {%>
                         <tr>
                             <td class="event-image-container">
-                                <img src="images/<%= evt.getImgName() %>" alt="<%= evt.getName() %>" class="event-img">
+                                <img src="images/<%= evt.getImgName()%>" alt="<%= evt.getName()%>" class="event-img">
                             </td>
                             <td class="event-description">
-                                <span><%= evt.getName() %></span>
+                                <span><%= evt.getName()%></span>
                             </td>
                             <td class="event-date">
-                                <span><%= cart.getDateFormat().format(evt.getDate()) %></span>
+                                <span><%= cart.getDateFormat().format(evt.getDate())%></span>
                             </td>
                             <td class="event-location">
-                                <span><%= evt.getLocation() %></span>
+                                <span><%= evt.getLocation()%></span>
                             </td>
                             <td class="event-cost">
-                                <span><%= cart.getCostFormat().format(evt.getCost()) %></span>
+                                <span><%= cart.getCostFormat().format(evt.getCost())%></span>
                             </td>
                             <td  class="event-add">
-                                <input type="checkbox" name="add-event" value="<%= evt.getName() %>"><br>
+                                <input type="checkbox" name="add-event" value="<%= evt.getName()%>"><br>
                             </td>
                         </tr>
-                        <% } %>
+                        <% }%>
                         <tr>
                             <th></th>
                             <th></th>
                             <th></th>
                             <th>Total Cost:</th>
-                            <th><%= cart.getCostFormat().format(cart.getTotalCost()) %></th>
+                            <th><%= cart.getCostFormat().format(cart.getTotalCost())%></th>
                             <th></th>
                         </tr>
                     </tbody>

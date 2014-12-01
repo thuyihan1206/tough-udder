@@ -129,7 +129,8 @@ hr {
     font-size: 14px;
 } 
 
-#log-in .error {
+#log-in .error,
+#log-in-bubble .error {
     color: red;
     font-style: italic;
     font-size: 85%;
@@ -266,4 +267,36 @@ hr {
 
 .event-submit:hover {
     background: #6B2400;
+}
+
+#log-in-bubble {
+    margin-left: auto;
+    margin-right: auto;
+    width: 350px;
+    color: #7A2900;
+    background-color: #FFE0C2;
+    box-shadow: 3px 3px 3px #888888;
+    padding: 10px;
+    border-radius: 15px;
+}
+
+#log-in-bubble p {
+    font-size: 120%;
+}
+
+#log-in-bubble label {
+    display: inline-block;
+    text-align: right;
+    height: 25px;
+    width: 100px;
+    font-size: 14px;
+}
+
+#log-in-bubble input {
+    width: 150px;
+}
+
+#log-in-bubble span {
+    display: inline-block;
+    width: 100px;
 }
