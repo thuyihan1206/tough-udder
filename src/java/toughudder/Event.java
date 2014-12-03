@@ -11,14 +11,13 @@ public class Event implements Serializable {
 
     private final String location;
 
-    private final Date date;
+    private final String date;
 
     private final double cost;
 
     private final String imgName;
 
-    public Event(
-            String name, String location, Date date, double cost, String imgName) {
+    public Event(String name, String location, String date, double cost, String imgName) {
         this.name = name;
         this.location = location;
         this.date = date;
@@ -38,7 +37,7 @@ public class Event implements Serializable {
         return location;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
