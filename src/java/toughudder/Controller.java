@@ -2,6 +2,7 @@ package toughudder;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -72,6 +73,7 @@ public class Controller extends HttpServlet {
 
             case "events":
                 url = "/events.jsp";
+                session.setAttribute("events", EventStore.instance().getEvents());
                 break;
 
             case "cart":
