@@ -42,7 +42,9 @@
                                 <span>${event.location}</span>
                             </td>
                             <td  class="event-add">
-                                <input type="checkbox" name="add-event" value="${event.name}"><br>
+                                <input type="checkbox" name="add-event" value="${event.name}"
+                                       <c:if test="${cart.hasEvent(event.name)}"> checked</c:if>
+                                ><br>
                             </td>
                           </tr>
                         </c:forEach>

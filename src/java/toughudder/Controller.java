@@ -74,15 +74,15 @@ public class Controller extends HttpServlet {
             case "events":
                 url = "/events.jsp";
                 session.setAttribute("events", EventStore.instance().getEvents());
+                Cart cart = (Cart) session.getAttribute(CART);
+                if (cart == null) {
+                    cart = new Cart();
+                    session.setAttribute(CART, cart);
+                }
                 break;
 
             case "cart":
                 url = "/cart.jsp";
-                break;
-
-            case "Remove from Cart":
-                url = "/cart.jsp";
-                updateCart(request, response, false);
                 break;
 
             case "Checkout":
@@ -116,9 +116,9 @@ public class Controller extends HttpServlet {
                 }
                 break;
 
-            case "Add to Cart":
+            case "Update Cart":
                 url = "/cart.jsp";
-                updateCart(request, response, true);
+                updateCart(request, response);
                 break;
         }
 
@@ -132,11 +132,8 @@ public class Controller extends HttpServlet {
      *
      * @param request - The request object
      * @param response - The response object
-     * @param add - true to add, false to remove
      */
-    private void updateCart(
-            HttpServletRequest request, HttpServletResponse response, boolean add) {
-
+    private void updateCart(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession();
         Cart cart = (Cart) session.getAttribute(CART);
         if (cart == null) {
@@ -144,21 +141,12 @@ public class Controller extends HttpServlet {
             session.setAttribute(CART, cart);
         }
         String[] selectedEvents = request.getParameterValues(EVENT_CHOICES); // Only the checked boxes are returned!
+        cart.clear();
         if (selectedEvents != null) {
             for (String name : selectedEvents) {
                 Event event = EventStore.instance().getEvent(name);
-                if (event != null) {
-                    if (add) {
-                        cart.addEvent(event);
-                        System.out.println("Event added to cart: " + name);
-                    } else {
-                        cart.removeEvent(event);
-                        System.out.println("Event removed from cart: " + name);
-                    }
-                } else {
-                    System.out.println("Received a bad event name in updateCart():"
-                            + name);
-                }
+                cart.addEvent(event);
+                System.out.println("Event added to cart: " + name);
             }
         }
     }

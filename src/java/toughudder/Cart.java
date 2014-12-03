@@ -68,4 +68,20 @@ public class Cart implements Serializable {
         }
         return cost;
     }
+    
+    /**
+     * Helper function that checks to see if the cart currently 
+     * holds the event given by eventName.
+     * 
+     * @param eventName - The name of the event to check for.
+     * @return true if the cart currently holds this event, false otherwise.
+     */
+    public boolean hasEvent(String eventName) {
+        for(Event event : this.getEvents()) {
+            if(event.getName().equals(eventName)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
