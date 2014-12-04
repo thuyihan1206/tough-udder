@@ -42,15 +42,14 @@
                                 <span>${event.location}</span>
                             </td>
                             <td  class="event-add">
-                                <input type="checkbox" name="add-event" value="${event.name}"
-                                       <c:if test="${cart.hasEvent(event.name)}"> checked</c:if>
-                                ><br>
+                                <input type="checkbox" name="add-event" value="${event.name}"><br>
+                                <!--       <c:if test="${cart.hasEvent(event.name)}"> checked</c:if> -->
                             </td>
                           </tr>
                         </c:forEach>
                     </tbody>
                 </table>
-                <input class="event-submit" id="event-submit-btn" type="submit" name="action" value="Update Cart"/>
+                <input class="event-submit" id="event-submit-btn" type="submit" name="action" value="Add to Cart"/>
             </form>
             <%@include file="footer.jsp" %>
         </div>
