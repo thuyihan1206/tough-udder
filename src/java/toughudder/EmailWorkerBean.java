@@ -30,7 +30,7 @@ public class EmailWorkerBean {
         msg.append("<th>Cost</th></tr>");
         for (Event evt : cart.getEvents()) {
             msg.append("<tr><td>").append(evt.getName()).append("</td>");
-            msg.append("<td>").append(cart.getDateFormat().format(evt.getDate()));
+            msg.append("<td>").append(evt.getDate());
             msg.append("</td>");
             msg.append("<td>").append(evt.getLocation()).append("</td>");
             msg.append("<td align='right'>");
