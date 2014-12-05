@@ -1,7 +1,5 @@
 package toughudder;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -81,7 +79,7 @@ public class EventStore {
 
     private Event createHolyCowEvent() {
         return new Event(HOLY_COW, "Wichita, Kansas", "06-19-2015", 50.00, "holy-cow.jpg");
-        
+
     }
 
     private Event createMadCowEvent() {

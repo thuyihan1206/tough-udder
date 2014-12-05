@@ -14,7 +14,7 @@ import javax.servlet.ServletContextListener;
  *
  * @author Evan Chan
  */
-public class CreateAccountListenser implements ServletContextListener {
+public class CreateAccountListener implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {

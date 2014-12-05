@@ -25,27 +25,27 @@
                     </thead>
                     <tbody>
                         <c:forEach var="event" items="${events}">
-                          <tr>
-                            <td class="event-image-container">
-                                <img src="images/${event.imgName}" alt="${event.name} Image" class="event-img">
-                            </td>
-                            <td class="event-description">
-                                <span>${event.name}</span>
-                            </td>
-                            <td class="event-cost">
-                                <span>${event.cost}</span>
-                            </td>
-                            <td class="event-date">
-                                <span>${event.date}</span>
-                            </td>
-                            <td class="event-location">
-                                <span>${event.location}</span>
-                            </td>
-                            <td  class="event-add">
-                                <input type="checkbox" name="add-event" value="${event.name}"><br>
-                                <!--       <c:if test="${cart.hasEvent(event.name)}"> checked</c:if> -->
-                            </td>
-                          </tr>
+                            <tr>
+                                <td class="event-image-container">
+                                    <img src="images/${event.imgName}" alt="${event.name} Image" class="event-img">
+                                </td>
+                                <td class="event-description">
+                                    <span>${event.name}</span>
+                                </td>
+                                <td class="event-cost">
+                                    <span>${event.cost}</span>
+                                </td>
+                                <td class="event-date">
+                                    <span>${event.date}</span>
+                                </td>
+                                <td class="event-location">
+                                    <span>${event.location}</span>
+                                </td>
+                                <td  class="event-add">
+                                    <input type="checkbox" name="add-event" value="${event.name}"><br>
+                                    <!--       <c:if test="${cart.hasEvent(event.name)}"> checked</c:if> -->
+                                    </td>
+                                </tr>
                         </c:forEach>
                     </tbody>
                 </table>

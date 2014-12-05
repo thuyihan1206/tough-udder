@@ -2,7 +2,6 @@ package toughudder;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -67,7 +66,7 @@ public class Controller extends HttpServlet {
                 break;
 
             case "logout":
-                session.invalidate();
+                session.removeAttribute("account");
                 url = "/index.jsp";
                 break;
 
@@ -114,7 +113,7 @@ public class Controller extends HttpServlet {
                 url = "/cart.jsp";
                 updateCart(request, response, false);
                 break;
-                
+
             case "Add to Cart":
                 url = "/cart.jsp";
                 updateCart(request, response, true);
@@ -144,7 +143,7 @@ public class Controller extends HttpServlet {
         if (selectedEvents != null) {
             for (String name : selectedEvents) {
                 Event event = EventStore.instance().getEvent(name);
-                 if (event != null) {
+                if (event != null) {
                     if (add) {
                         cart.addEvent(event);
                         System.out.println("Event added to cart: " + name);
