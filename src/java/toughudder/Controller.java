@@ -2,6 +2,7 @@ package toughudder;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -72,15 +73,11 @@ public class Controller extends HttpServlet {
 
             case "events":
                 url = "/events.jsp";
+                session.setAttribute("events", EventStore.instance().getEvents());
                 break;
 
             case "cart":
                 url = "/cart.jsp";
-                break;
-
-            case "Remove from Cart":
-                url = "/cart.jsp";
-                updateCart(request, response, false);
                 break;
 
             case "Checkout":
@@ -113,7 +110,11 @@ public class Controller extends HttpServlet {
                     url = "/confirmation.jsp";
                 }
                 break;
-
+            case "Remove from Cart":
+                url = "/cart.jsp";
+                updateCart(request, response, false);
+                break;
+                
             case "Add to Cart":
                 url = "/cart.jsp";
                 updateCart(request, response, true);
@@ -132,9 +133,7 @@ public class Controller extends HttpServlet {
      * @param response - The response object
      * @param add - true to add, false to remove
      */
-    private void updateCart(
-            HttpServletRequest request, HttpServletResponse response, boolean add) {
-
+    private void updateCart(HttpServletRequest request, HttpServletResponse response, boolean add) {
         HttpSession session = request.getSession();
         Cart cart = (Cart) session.getAttribute(CART);
         if (cart == null) {
@@ -145,7 +144,7 @@ public class Controller extends HttpServlet {
         if (selectedEvents != null) {
             for (String name : selectedEvents) {
                 Event event = EventStore.instance().getEvent(name);
-                if (event != null) {
+                 if (event != null) {
                     if (add) {
                         cart.addEvent(event);
                         System.out.println("Event added to cart: " + name);
@@ -154,8 +153,7 @@ public class Controller extends HttpServlet {
                         System.out.println("Event removed from cart: " + name);
                     }
                 } else {
-                    System.out.println("Received a bad event name in updateCart():"
-                            + name);
+                    System.out.println("Received a bad event name in updateCart():" + name);
                 }
             }
         }

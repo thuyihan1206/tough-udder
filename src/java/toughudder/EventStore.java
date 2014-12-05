@@ -18,11 +18,10 @@ import java.util.Map;
  */
 public class EventStore {
 
-    private final SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy");
-    private final String UDDER_DAY = "Udder Day";
-    private final String MUDDY_UDDER = "Muddy Udder";
-    private final String HOLY_COW = "Holy Cow";
-    private final String MAD_COW = "Mad Cow";
+    private final String UDDER_DAY = "An Udder Day In Paradise: Water Adventure";
+    private final String MUDDY_UDDER = "Muddy Udder Obstacle Course";
+    private final String HOLY_COW = "Holy Cow! Pasture Run";
+    private final String MAD_COW = "Mad Cow Mud Run";
 
     private static EventStore INSTANCE = null;
     private Map<String, Event> events;
@@ -73,38 +72,19 @@ public class EventStore {
     }
 
     private Event createUdderDayEvent() {
-        try {
-            return new Event(UDDER_DAY, "The Bahamas", dateFormat.parse("07-21-2015"), 2500.00, "just-an-udder-day.jpg");
-        } catch (ParseException e) {
-            e.printStackTrace();
-            return null;
-        }
+        return new Event(UDDER_DAY, "The Bahamas", "07-21-2015", 2500.00, "just-an-udder-day.jpg");
     }
 
     private Event createMuddyUdderEvent() {
-        try {
-            return new Event(MUDDY_UDDER, "Everglades, Florida", dateFormat.parse("07-07-2015"), 120.00, "muddy-udder.png");
-        } catch (ParseException e) {
-            e.printStackTrace();
-            return null;
-        }
+        return new Event(MUDDY_UDDER, "Everglades, Florida", "07-07-2015", 120.00, "muddy-udder.png");
     }
 
     private Event createHolyCowEvent() {
-        try {
-            return new Event(HOLY_COW, "Wichita, Kansas", dateFormat.parse("06-19-2015"), 50.00, "holy-cow.jpg");
-        } catch (ParseException e) {
-            e.printStackTrace();
-            return null;
-        }
+        return new Event(HOLY_COW, "Wichita, Kansas", "06-19-2015", 50.00, "holy-cow.jpg");
+        
     }
 
     private Event createMadCowEvent() {
-        try {
-            return new Event(MAD_COW, "Knoxville, Tennessee", dateFormat.parse("06-15-2015"), 75.00, "mad-cow-mud-run.png");
-        } catch (ParseException e) {
-            e.printStackTrace();
-            return null;
-        }
+        return new Event(MAD_COW, "Knoxville, Tennessee", "06-15-2015", 75.00, "mad-cow-mud-run.png");
     }
 }

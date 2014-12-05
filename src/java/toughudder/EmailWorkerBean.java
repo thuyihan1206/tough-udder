@@ -7,8 +7,8 @@ public class EmailWorkerBean {
 
     private static final String BR = "<br />";
 
-    private static final String FROM = "swdevconf@jhu.edu";
-    private static final String SUBJ = " JHU SW Dev Conf Registration";
+    private static final String FROM = "registration@toughudder.com";
+    private static final String SUBJ = "Tough Udder Registration";
 
     private final String error;
 
