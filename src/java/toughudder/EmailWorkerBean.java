@@ -1,6 +1,7 @@
 package toughudder;
 
 import edu.jhu.email.MailUtilGmail;
+import java.util.regex.Pattern;
 import javax.servlet.http.HttpServletRequest;
 
 public class EmailWorkerBean {
@@ -20,6 +21,15 @@ public class EmailWorkerBean {
         StringBuilder msg = new StringBuilder("<html><body>");
         Cart cart = (Cart) request.getSession().getAttribute(Controller.CART);
         String email = request.getParameter(Controller.EMAIL);
+
+        // check email pattern
+        String stringPattern = "[_a-z0-9\\-\\+]+(?:\\.[_a-z0-9\\-\\+]+)*@(?:[a-z0-9\\-]+(?:\\.[a-z0-9\\-]+)*\\.[a-z]{2,})"; // http://en.wikipedia.org/wiki/Email_address"
+        Pattern pattern = Pattern.compile(stringPattern, Pattern.CASE_INSENSITIVE);
+        if (!pattern.matcher(email).matches()) {
+            this.msg = new String();
+            this.error = "Email format not standard.";
+            return;
+        }
 
         msg.append("<p>Your Tough Udder registration(s) have been processed.");
         msg.append("Below you will find a summary of your registration and ");

@@ -109,6 +109,7 @@ public class Controller extends HttpServlet {
                     url = "/confirmation.jsp";
                 }
                 break;
+
             case "Remove from Cart":
                 url = "/cart.jsp";
                 updateCart(request, response, false);

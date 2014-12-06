@@ -27,7 +27,7 @@
                 List<Event> contents = cart.getEvents();
             %>
             <p>Your Tough Udder registration is complete! A summary is shown below<% if (email != null && error == null) {%> and has been sent to <%= email%><% } %>.</p>
-            <% if (error != null) {%>
+            <% if (email != null && email.length() > 1 && error != null) {%>
             <p>There was a problem sending a registration email to <b><%= email%></b>.</p>
             <p><%= error.toString()%></p>
             <% } %>
