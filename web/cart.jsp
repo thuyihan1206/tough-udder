@@ -68,7 +68,9 @@
                         </tr>
                     </tbody>
                 </table>
+                <br/>
                 <input class="event-submit" id="remove-evt-btn" type="submit" name="action" value="Remove from Cart"/>
+                &nbsp;
                 <input class="event-submit" id="checkout-btn" type="submit" name="action" value="Checkout"/>
             </form>
             <%@include file="footer.jsp" %>

@@ -139,7 +139,7 @@
                     </table>
                 </fieldset><br />
                 <fieldset>
-                    <legend>Email Address</legend>
+                    <legend>Email Address (optional)</legend>
                     <input type="text" name="email" size="30" value="<%= request.getParameter(Controller.EMAIL) == null ? "" : request.getParameter(Controller.EMAIL)%>" />
                 </fieldset>
                 <br />

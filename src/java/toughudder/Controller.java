@@ -1,7 +1,21 @@
 package toughudder;
 
+import com.lowagie.text.Chunk;
+import com.lowagie.text.Document;
+import com.lowagie.text.DocumentException;
+import com.lowagie.text.Element;
+import com.lowagie.text.Image;
+import com.lowagie.text.Paragraph;
+import com.lowagie.text.Phrase;
+import com.lowagie.text.Rectangle;
+import com.lowagie.text.pdf.PdfPCell;
+import com.lowagie.text.pdf.PdfPTable;
+import com.lowagie.text.pdf.PdfWriter;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -102,7 +116,7 @@ public class Controller extends HttpServlet {
                     EmailWorkerBean ewb
                             = new EmailWorkerBean(request, ccwb.getData());
 
-                    request.setAttribute(CC_DATA, ccwb.getData());
+                    session.setAttribute(CC_DATA, ccwb.getData());
                     if (ewb.isError()) {
                         request.setAttribute(ERROR, ewb.getError());
                     }
@@ -118,6 +132,16 @@ public class Controller extends HttpServlet {
             case "Add to Cart":
                 url = "/cart.jsp";
                 updateCart(request, response, true);
+                break;
+
+            case "print":
+                printPDF(request, response);
+                return;
+
+            case "startover":
+                session.removeAttribute(CC_DATA);
+                session.removeAttribute(CART);
+                url = "/events.jsp";
                 break;
         }
 
@@ -178,6 +202,110 @@ public class Controller extends HttpServlet {
             url = redirectPage;
         }
         return url;
+    }
+
+    /**
+     * Print PDF
+     *
+     * @param request - The request object
+     * @param response - The response object
+     */
+    protected void printPDF(HttpServletRequest request, HttpServletResponse response)
+            throws IOException {
+        HttpSession session = request.getSession();
+
+        try {
+            // construct document body
+            Document document = new Document();
+            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+            PdfWriter.getInstance(document, buffer);
+
+            document.open();
+
+            CreditCardInfoBean ccib = (CreditCardInfoBean) session.getAttribute(Controller.CC_DATA);
+            Cart cart = (Cart) session.getAttribute("cart");
+            Account account = (Account) session.getAttribute("account");
+            List<Event> contents = cart.getEvents();
+
+            String imagePath = getServletContext().getRealPath("/images/logo.jpg");
+            Image image = Image.getInstance(imagePath);
+            image.scaleAbsolute(200, 130);
+            document.add(image);
+
+            document.add(new Paragraph("\n"));
+            document.add(new Paragraph(account.getFirstName() + " " + account.getLastName() + ","));
+            document.add(new Paragraph("Your Tough Udder registration is complete! A summary is shown below."));
+
+            PdfPTable table = new PdfPTable(5);
+            table.setWidths(new int[]{1, 1, 1, 1, 1});
+            table.setWidthPercentage(100);
+            table.getDefaultCell().setPaddingBottom(5);
+            table.getDefaultCell().setBorder(Rectangle.NO_BORDER);
+            table.getDefaultCell().setVerticalAlignment(Element.ALIGN_MIDDLE);
+
+            PdfPCell cell = new PdfPCell(table.getDefaultCell());
+            cell.setBorder(Rectangle.BOTTOM);
+            cell.setPhrase(new Phrase(""));
+            table.addCell(cell);
+            cell.setPhrase(new Phrase("Event"));
+            table.addCell(cell);
+            cell.setPhrase(new Phrase("Date"));
+            table.addCell(cell);
+            cell.setPhrase(new Phrase("Location"));
+            table.addCell(cell);
+            cell.setPhrase(new Phrase("Cost"));
+            table.addCell(cell);
+
+            for (Event evt : contents) {
+                // this version of iText doesn't support .png
+                imagePath = getServletContext().getRealPath("/images/" + evt.getImgName().replaceAll(".png", ".jpg"));
+                image = Image.getInstance(imagePath);
+                table.addCell(image);
+                table.addCell(evt.getName());
+                table.addCell(evt.getDate());
+                table.addCell(evt.getLocation());
+                table.addCell(cart.getCostFormat().format(evt.getCost()));
+            }
+
+            cell.setBorder(Rectangle.TOP);
+            cell.setPhrase(new Phrase(""));
+            table.addCell(cell);
+            cell.setPhrase(new Phrase(""));
+            table.addCell(cell);
+            cell.setPhrase(new Phrase(""));
+            table.addCell(cell);
+            cell.setPhrase(new Phrase("Total"));
+            table.addCell(cell);
+            cell.setPhrase(new Phrase(cart.getCostFormat().format(cart.getTotalCost())));
+            table.addCell(cell);
+
+            document.add(table);
+
+            document.add(Chunk.NEWLINE);
+            document.add(new Paragraph("The above total has been charged to this credit card:"));
+            document.add(Chunk.NEWLINE);
+            document.add(new Paragraph(ccib.getName()));
+            document.add(new Paragraph(ccib.getAddress()));
+            document.add(new Paragraph(ccib.getCity() + ", " + ccib.getState() + " " + ccib.getZip()));
+            document.add(Chunk.NEWLINE);
+            document.add(new Paragraph(ccib.getType() + "/" + ccib.getRedactedNumber()));
+            document.add(new Paragraph("Expires " + ccib.getExpiryMonth() + "/" + ccib.getExpiryYear()));
+
+            document.close();
+
+            // generate attachment
+            response.setContentType("application/pdf");
+            response.setContentLength(buffer.size());
+            response.setHeader("content-disposition", "attachement; filename=registration.pdf");
+            response.setHeader("cache-control", "no-cache");
+
+            OutputStream out = response.getOutputStream();
+            buffer.writeTo(out);
+            out.close();
+        } catch (DocumentException ex) {
+            System.out.println(ex.getMessage());
+        }
+
     }
 
     /**

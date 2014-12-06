@@ -49,6 +49,7 @@
                         </c:forEach>
                     </tbody>
                 </table>
+                <br />
                 <input class="event-submit" id="event-submit-btn" type="submit" name="action" value="Add to Cart"/>
             </form>
             <%@include file="footer.jsp" %>

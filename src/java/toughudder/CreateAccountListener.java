@@ -22,7 +22,7 @@ public class CreateAccountListener implements ServletContextListener {
         ServletContext sc = sce.getServletContext();
         ArrayList<Account> accountList = new ArrayList<>();
 
-        accountList.add(new Account("tough", "udder", "Tough", "Udder", "chchan1206@gmail.com"));
+        accountList.add(new Account("evan", "chan", "Evan", "Chan", "chchan1206@gmail.com"));
         accountList.add(new Account("tammy", "perrin", "Tammy", "Perrin", "tperrin47@gmail.com"));
         accountList.add(new Account("john", "junghans", "John", "Junghans", "jmasterj@gmail.com"));
         sc.setAttribute("accountList", accountList);

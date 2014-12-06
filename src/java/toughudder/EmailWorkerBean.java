@@ -20,6 +20,7 @@ public class EmailWorkerBean {
         StringBuilder error = new StringBuilder();
         StringBuilder msg = new StringBuilder("<html><body>");
         Cart cart = (Cart) request.getSession().getAttribute(Controller.CART);
+        Account account = (Account) request.getSession().getAttribute("account");
         String email = request.getParameter(Controller.EMAIL);
 
         // check email pattern
@@ -31,7 +32,8 @@ public class EmailWorkerBean {
             return;
         }
 
-        msg.append("<p>Your Tough Udder registration(s) have been processed.");
+        msg.append("<p>").append(account.getFirstName()).append(" ").append(account.getLastName()).append(",</p>");
+        msg.append("<p>Your Tough Udder registration(s) have been processed. ");
         msg.append("Below you will find a summary of your registration and ");
         msg.append("payment information.</p>").append(BR);
 
