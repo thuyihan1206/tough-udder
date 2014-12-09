@@ -45,7 +45,7 @@
                                 <span><%= evt.getName()%></span>
                             </td>
                             <td class="event-date">
-                                <span><%= cart.getDateFormat().format(evt.getDate())%></span>
+                                <span><%= evt.getDate()%></span>
                             </td>
                             <td class="event-location">
                                 <span><%= evt.getLocation()%></span>
