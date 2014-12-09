@@ -17,19 +17,20 @@
             <%@include file="header.jsp" %>
             <%@ page import="java.util.List" %>
             <%@ page import="toughudder.*" %>
-            <% CreditCardInfoBean ccib = (CreditCardInfoBean)request.getAttribute(Controller.CC_DATA);
-               Object error = request.getAttribute(Controller.ERROR);
-               String email = request.getParameter(Controller.EMAIL);
-               Cart cart = (Cart)session.getAttribute("cart");
-               if (cart == null) {
-                  cart = new Cart();
-               }
-               List<Event> contents = cart.getEvents();
+            <% CreditCardInfoBean ccib = (CreditCardInfoBean) session.getAttribute(Controller.CC_DATA);
+                Object error = request.getAttribute(Controller.ERROR);
+                String email = request.getParameter(Controller.EMAIL);
+                Cart cart = (Cart) session.getAttribute("cart");
+                if (cart == null) {
+                    cart = new Cart();
+                }
+                List<Event> contents = cart.getEvents();
             %>
-            <p>Your Tough Udder registration is complete! A summary is shown below<% if (email != null && error == null) { %> and has been sent to <%= email %><% } %>.</p>
-            <% if (error != null) { %>
-            <p>There was a problem sending a registration email to <b><%= email %></b>.</p>
-            <p><%= error.toString() %></p>
+            <p>${account.firstName} ${account.lastName},</p>
+            <p>Your Tough Udder registration is complete! A summary is shown below<% if (email != null && error == null) {%> and has been sent to <%= email%><% } %>.</p>
+            <% if (email != null && email.length() > 1 && error != null) {%>
+            <p>There was a problem sending a registration email to <b><%= email%></b>.</p>
+            <p><%= error.toString()%></p>
             <% } %>
             <table id="events-table" class="events-table">
                 <thead>
@@ -51,7 +52,7 @@
                             <span><%= evt.getName()%></span>
                         </td>
                         <td class="event-date">
-                            <span><%= cart.getDateFormat().format(evt.getDate())%></span>
+                            <span><%= evt.getDate()%></span>
                         </td>
                         <td class="event-location">
                             <span><%= evt.getLocation()%></span>
@@ -70,15 +71,23 @@
                     </tr>
                 </tbody>
             </table>
-            <p>The above total has been charged to the this credit card:<br />
+            <p>The above total has been charged to this credit card:<br />
                 <br />
-                <%= ccib.getName() %><br />
-                <%= ccib.getAddress() %><br />
-                <%= ccib.getCity() %>,&nbsp<%= ccib.getState() %>&nbsp<%= ccib.getZip() %><br />
+                <%= ccib.getName()%><br />
+                <%= ccib.getAddress()%><br />
+                <%= ccib.getCity()%>,&nbsp<%= ccib.getState()%>&nbsp<%= ccib.getZip()%><br />
                 <br />
-                <%= ccib.getType() %>/<%= ccib.getRedactedNumber() %><br />
-                Expires <%= ccib.getExpiryMonth() %>/<%= ccib.getExpiryYear() %><br />
+                <%= ccib.getType()%>/<%= ccib.getRedactedNumber()%><br />
+                Expires <%= ccib.getExpiryMonth()%>/<%= ccib.getExpiryYear()%><br />
             </p>
+
+            <button class="event-submit" type="button" onclick="location.href = 'Controller?action=print'">
+                Print Confirmation in PDF</button>
+            &nbsp;
+            <button class="event-submit" type="button" onclick="location.href = 'Controller?action=startover'">
+                Register More</button>
+
+            <br />
             <%@include file="footer.jsp" %>
         </div>
     </body>

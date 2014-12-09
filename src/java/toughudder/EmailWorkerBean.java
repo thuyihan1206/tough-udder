@@ -1,6 +1,7 @@
 package toughudder;
 
 import edu.jhu.email.MailUtilGmail;
+import java.util.regex.Pattern;
 import javax.servlet.http.HttpServletRequest;
 
 public class EmailWorkerBean {
@@ -19,9 +20,20 @@ public class EmailWorkerBean {
         StringBuilder error = new StringBuilder();
         StringBuilder msg = new StringBuilder("<html><body>");
         Cart cart = (Cart) request.getSession().getAttribute(Controller.CART);
+        Account account = (Account) request.getSession().getAttribute("account");
         String email = request.getParameter(Controller.EMAIL);
 
-        msg.append("<p>Your Tough Udder registration(s) have been processed.");
+        // check email pattern
+        String stringPattern = "[_a-z0-9\\-\\+]+(?:\\.[_a-z0-9\\-\\+]+)*@(?:[a-z0-9\\-]+(?:\\.[a-z0-9\\-]+)*\\.[a-z]{2,})"; // http://en.wikipedia.org/wiki/Email_address"
+        Pattern pattern = Pattern.compile(stringPattern, Pattern.CASE_INSENSITIVE);
+        if (!pattern.matcher(email).matches()) {
+            this.msg = new String();
+            this.error = "Email format not standard.";
+            return;
+        }
+
+        msg.append("<p>").append(account.getFirstName()).append(" ").append(account.getLastName()).append(",</p>");
+        msg.append("<p>Your Tough Udder registration(s) have been processed. ");
         msg.append("Below you will find a summary of your registration and ");
         msg.append("payment information.</p>").append(BR);
 
@@ -30,7 +42,7 @@ public class EmailWorkerBean {
         msg.append("<th>Cost</th></tr>");
         for (Event evt : cart.getEvents()) {
             msg.append("<tr><td>").append(evt.getName()).append("</td>");
-            msg.append("<td>").append(cart.getDateFormat().format(evt.getDate()));
+            msg.append("<td>").append(evt.getDate());
             msg.append("</td>");
             msg.append("<td>").append(evt.getLocation()).append("</td>");
             msg.append("<td align='right'>");

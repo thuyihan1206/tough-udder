@@ -10,8 +10,6 @@ import java.text.DateFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -68,17 +66,17 @@ public class Cart implements Serializable {
         }
         return cost;
     }
-    
+
     /**
-     * Helper function that checks to see if the cart currently 
-     * holds the event given by eventName.
-     * 
+     * Helper function that checks to see if the cart currently holds the event
+     * given by eventName.
+     *
      * @param eventName - The name of the event to check for.
      * @return true if the cart currently holds this event, false otherwise.
      */
     public boolean hasEvent(String eventName) {
-        for(Event event : this.getEvents()) {
-            if(event.getName().equals(eventName)) {
+        for (Event event : this.getEvents()) {
+            if (event.getName().equals(eventName)) {
                 return true;
             }
         }

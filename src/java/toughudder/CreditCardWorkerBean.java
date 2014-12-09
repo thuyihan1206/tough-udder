@@ -1,5 +1,6 @@
 package toughudder;
 
+import java.util.regex.Pattern;
 import javax.servlet.http.HttpServletRequest;
 
 public class CreditCardWorkerBean {
@@ -24,6 +25,18 @@ public class CreditCardWorkerBean {
         String cardNum = request.getParameter("cardNum");
         if (cardNum == null || cardNum.length() < 1) {
             error.append("Please enter a credit card number.").append(BR);
+        }
+        if (cardType != null) {
+            String stringPattern;
+            if (cardType.equals("American Express")) {
+                stringPattern = "\\d{15}";
+            } else {
+                stringPattern = "\\d{16}";
+            }
+            Pattern pattern = Pattern.compile(stringPattern, Pattern.CASE_INSENSITIVE);
+            if (!pattern.matcher(cardNum.replaceAll("\\s+", "")).matches()) {
+                error.append("Please enter a valid card number (15 digits for Amex; 16 digits for other cards.)").append(BR);
+            }
         }
         String expYear = request.getParameter("expYear");
         if (expYear == null || expYear.length() < 1) {
