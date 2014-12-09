@@ -18,10 +18,10 @@ import java.util.Map;
  */
 public class EventStore {
 
-    private final String UDDER_DAY = "An Udder Day In Paradise: Water Adventure";
-    private final String MUDDY_UDDER = "Muddy Udder Obstacle Course";
-    private final String HOLY_COW = "Holy Cow! Pasture Run";
-    private final String MAD_COW = "Mad Cow Mud Run";
+    private final String UDDER_DAY;
+    private final String MUDDY_UDDER;
+    private final String HOLY_COW;
+    private final String MAD_COW;
 
     private static EventStore INSTANCE = null;
     private Map<String, Event> events;
@@ -42,6 +42,10 @@ public class EventStore {
      * Private singleton constructor.
      */
     private EventStore() {
+        UDDER_DAY = "An Udder Day In Paradise: Water Adventure";
+        MUDDY_UDDER = "Muddy Udder Obstacle Course";
+        HOLY_COW = "Holy Cow! Pasture Run";
+        MAD_COW = "Mad Cow Mud Run";
         Map<String, Event> tempEvents = new HashMap<String, Event>();
         tempEvents.put(UDDER_DAY, createUdderDayEvent());
         tempEvents.put(MUDDY_UDDER, createMuddyUdderEvent());

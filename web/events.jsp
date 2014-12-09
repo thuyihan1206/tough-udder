@@ -43,7 +43,6 @@
                             </td>
                             <td  class="event-add">
                                 <input type="checkbox" name="add-event" value="${event.name}"><br>
-                                <!--       <c:if test="${cart.hasEvent(event.name)}"> checked</c:if> -->
                             </td>
                           </tr>
                         </c:forEach>

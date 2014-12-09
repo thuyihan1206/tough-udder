@@ -119,6 +119,10 @@ public class Controller extends HttpServlet {
                 url = "/cart.jsp";
                 updateCart(request, response, true);
                 break;
+                
+            case "profile":
+                url = "/profile.jsp";
+                break;
         }
 
         RequestDispatcher dispatcher = servletContext.getRequestDispatcher(url);
