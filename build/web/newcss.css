@@ -13,12 +13,19 @@ body {
     padding: 0;
 }
 
+.profile-pic-container,
 .outborder,
 #outborder {
     width: 960px;
     margin: 20px auto;
 }
 
+.profile-pic {
+    width: 100%;
+}
+
+
+h1,
 p {
     font-family: "Arial", sans-serif;
     color: #7A2900;
@@ -194,7 +201,7 @@ hr {
 }
 
 .event-image-container {
-    width: 175px; 
+    width: 150px; 
 }
 
 .event-img {

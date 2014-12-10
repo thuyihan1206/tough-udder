@@ -11,14 +11,14 @@
     <body>
         <div id="outborder">
             <%@include file="header.jsp" %>
-            
+
             <h1>In The Beginning...</h1>
-            
-            Tough Udder began with a few young calfs who had a flare for extreme fitness and a love of all things MUD. 
+
+            <p>Tough Udder began with a few young calfs who had a flare for extreme fitness and a love of all things MUD.</p>
             <div class="profile-pic-container">
                 <img src="images/Cow_Race.jpg" alt="Cow Race Image" class="profile-pic">
             </div>
-            
+
             <%@include file="footer.jsp" %>
         </div>
     </body>

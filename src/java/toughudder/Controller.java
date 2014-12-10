@@ -133,7 +133,8 @@ public class Controller extends HttpServlet {
                 url = "/cart.jsp";
                 updateCart(request, response, true);
                 break;
-			case "profile":
+
+            case "profile":
                 url = "/profile.jsp";
                 break;
 
