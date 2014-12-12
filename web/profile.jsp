@@ -18,7 +18,16 @@
             <div class="profile-pic-container">
                 <img src="images/Cow_Race.jpg" alt="Cow Race Image" class="profile-pic">
             </div>
-
+            <h1>Today:</h1>
+            <p>
+                Tough Udder is more than just a company: IT IS A MISSION. This is our manifesto:
+            </p>
+            <ol>
+                <li>Take no bull.</li>
+                <li>Be udderly extreme.</li>
+                <li>Moove as though your life depends on it.</li>
+            </ol>
+            
             <%@include file="footer.jsp" %>
         </div>
     </body>
