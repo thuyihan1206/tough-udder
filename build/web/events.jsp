@@ -33,7 +33,7 @@
                                     <span>${event.name}</span>
                                 </td>
                                 <td class="event-cost">
-                                    <span>${event.cost}</span>
+                                    <span>$${event.cost}</span>
                                 </td>
                                 <td class="event-date">
                                     <span>${event.date}</span>

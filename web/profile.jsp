@@ -27,7 +27,7 @@
                 <li>Be udderly extreme.</li>
                 <li>Moove as though your life depends on it.</li>
             </ol>
-            
+
             <%@include file="footer.jsp" %>
         </div>
     </body>

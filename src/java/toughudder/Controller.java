@@ -95,12 +95,12 @@ public class Controller extends HttpServlet {
 
             case "Checkout":
                 url = checkLogin(request, "/checkout.jsp", "/login.jsp");
-//                if (url.equals("/checkout.jsp")) {
-//                    // use HTTPS
-//                    url = "https://localhost:8443/ToughUdder/checkout.jsp"; // local; need to start Tomcat standalone outside NetBeans
-//                    response.sendRedirect(url);
-//                    return;
-//                }
+                if (url.equals("/checkout.jsp")) {
+                    // use HTTPS
+                    url = "https://localhost:8443/ToughUdder/checkout.jsp"; // local; need to start Tomcat standalone outside NetBeans
+                    response.sendRedirect(url);
+                    return;
+                }
                 break;
 
             case "complete":

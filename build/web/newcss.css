@@ -13,17 +13,26 @@ body {
     padding: 0;
 }
 
-.profile-pic-container,
 .outborder,
 #outborder {
     width: 960px;
     margin: 20px auto;
 }
 
-.profile-pic {
-    width: 100%;
+.profile-pic-container {
+    width: 860px;
+    margin: 20px auto;
 }
 
+.profile-pic {
+    width: 100%;
+    display: block;
+    margin: auto;
+    padding: 3px;
+    border: 3px solid #996633;
+    background-color: #BFA89D;
+    box-shadow: 3px 3px 3px #888888;
+}
 
 h1,
 p {
@@ -31,6 +40,14 @@ p {
     color: #7A2900;
     padding-left: 10px;
     padding-right: 10px;
+}
+
+ol {
+    font-family: "Arial", sans-serif;
+    color: #7A2900;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-left: 20px;
 }
 
 #banner {
@@ -201,7 +218,7 @@ hr {
 }
 
 .event-image-container {
-    width: 150px; 
+    width: 120px; 
 }
 
 .event-img {

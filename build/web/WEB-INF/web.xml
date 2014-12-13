@@ -11,7 +11,6 @@
     <listener>
         <listener-class>toughudder.CreateAccountListener</listener-class>
     </listener>
-    <!-- uncomment this when ready to deploy
     <error-page>
         <error-code>404</error-code>
         <location>/error.jsp</location>
@@ -29,7 +28,6 @@
             <transport-guarantee>CONFIDENTIAL</transport-guarantee>
         </user-data-constraint>
     </security-constraint>
-    -->
     <session-config>
         <session-timeout>30</session-timeout>
     </session-config>
