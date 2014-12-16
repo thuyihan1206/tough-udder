@@ -19,6 +19,9 @@
             <%@ page import="java.text.DateFormatSymbols" %>
             <%@ page import="toughudder.*" %>
             <% Cart cart = (Cart) session.getAttribute(Controller.CART);
+                if (cart == null) {
+                    cart = new Cart();
+                }
                 String cost = cart.getCostFormat().format(cart.getTotalCost());
             %>
             <p>

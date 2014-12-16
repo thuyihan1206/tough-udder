@@ -97,7 +97,8 @@ public class Controller extends HttpServlet {
                 url = checkLogin(request, "/checkout.jsp", "/login.jsp");
                 if (url.equals("/checkout.jsp")) {
                     // use HTTPS
-                    url = "https://localhost:8443/ToughUdder/checkout.jsp"; // local; need to start Tomcat standalone outside NetBeans
+//                    url = "https://localhost:8443/ToughUdder/checkout.jsp"; // local; need to start Tomcat standalone outside NetBeans
+                    url = "https://dev8.jhuep.com:8443/ToughUdder/checkout.jsp"; // dev8 server
                     response.sendRedirect(url);
                     return;
                 }
